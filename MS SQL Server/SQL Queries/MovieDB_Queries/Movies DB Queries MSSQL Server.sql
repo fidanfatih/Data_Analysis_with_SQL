@@ -387,3 +387,18 @@ full join [dbo].[director] d
 on d.[dir_id]=md.[dir_id]
 where [act_gender] ='F';
 
+--25. Write a query that returns the shortest and longest actor name and number of characters in a table. 
+--If the number of characters in the name is the same, it will look in the dictionary order.
+
+select * 
+from (
+	select top 1 act_fname, LEN(act_fname) name_len 
+	from actor 
+	order by name_len ASC, act_fname ASC) TblMin
+UNION
+select * 
+from (
+	select top 1 act_fname, LEN(act_fname) name_len 
+	from actor 
+	order by name_len desc, act_fname desc) TblMax
+
